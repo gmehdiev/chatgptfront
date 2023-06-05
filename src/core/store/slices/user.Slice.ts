@@ -8,7 +8,7 @@ import { API_URL } from "../../http";
 
 interface authInfo {
     user: IUser,
-    isAuth: boolean
+    isAuth: boolean | undefined
 }
 
 interface initialState {
@@ -27,7 +27,7 @@ const initialState:initialState = {
                 isActivated: null,
                 id: null
                 },
-                isAuth: false},
+                isAuth: undefined},
     status: StatusRequestEnum.IDLE,
     error: null
 }

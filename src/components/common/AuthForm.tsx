@@ -7,10 +7,15 @@ import {
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import * as yup from "yup";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { Formik } from "formik";
 
-export const AuthForm = () => {
+interface AuthForm {
+  title: string;
+  handleClick: (email: string, password: string) => void;
+}
+
+export const AuthForm: FC<AuthForm> = ({ title, handleClick }) => {
   const validationSchema = yup.object({
     email: yup
       .string()
@@ -26,16 +31,12 @@ export const AuthForm = () => {
   const [password, setPassword] = useState("");
 
   const [show, setShow] = useState(false);
-  const handleClick = () => {
-    setShow(!show);
-  };
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
       validationSchema={validationSchema}
       onSubmit={(value) => {
-        // same shape as initial values
-        console.log(value);
+        handleClick(value.email, value.password);
       }}
     >
       {({ errors, touched, handleSubmit, setFieldError, setFieldValue }) => (
@@ -88,7 +89,9 @@ export const AuthForm = () => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={handleClick}
+                    onClick={() => {
+                      setShow(!show);
+                    }}
                     edge="end"
                   >
                     {show ? <VisibilityOff /> : <Visibility />}
@@ -98,7 +101,7 @@ export const AuthForm = () => {
             }}
           />
           <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-            Отправить
+            {title}
           </Button>
         </Box>
       )}
