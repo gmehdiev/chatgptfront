@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../types/models/IUser";
 import { login, logout, registration } from "../../utils/Auth";
 import { StatusRequestEnum } from "../../types/enums/StatusRequestEnum";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { AuthResponse } from "../../types/models/response/AuthResoinse";
 import { API_URL } from "../../http";
 
@@ -137,6 +137,7 @@ const handleActionFulfilled = (state: initialState, action: PayloadAction<IUser>
 const handleActionRejected= (state: initialState, action: PayloadAction<any>) => {
   state.status = StatusRequestEnum.ERROR;
   state.error = action.payload;
+  state.authInfo.isAuth= false
 }
 
 

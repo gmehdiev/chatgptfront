@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { RootState } from "./core/store/store";
-import { StatusRequestEnum } from "./core/types/enums/StatusRequestEnum";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Loader } from "./Pages/Loader/Loader";
 import { LoginPage } from "./Pages/Authentication/LoginPage";
