@@ -1,7 +1,11 @@
 import { styled } from "@mui/material";
 
 export const Nav = styled("div")({
-    width:'80%',
+    height: '100vh',
+    width:'20%',
     display: 'flex',
-    justifyContent: 'space-between' 
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    // marginRight: "auto"
+    
 })

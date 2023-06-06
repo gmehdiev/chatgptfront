@@ -130,6 +130,7 @@ const handleActionFulfilled = (state: initialState, action: PayloadAction<IUser>
   console.log('asd')
   state.status = StatusRequestEnum.SUCCESS;
   state.error = null;
+  console.log(action.payload)
   state.authInfo.user = action.payload;
   state.authInfo.isAuth = true;
 }

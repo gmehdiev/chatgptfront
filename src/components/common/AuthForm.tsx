@@ -45,7 +45,7 @@ export const AuthForm: FC<AuthForm> = ({ title, handleClick }) => {
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",
-            width: "20%",
+            width: "50%",
           }}
           component="form"
           autoComplete="off"
