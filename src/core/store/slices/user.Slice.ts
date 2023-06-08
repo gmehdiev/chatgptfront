@@ -3,7 +3,7 @@ import { IUser } from "../../types/models/IUser";
 import { login, logout, registration } from "../../utils/Auth";
 import { StatusRequestEnum } from "../../types/enums/StatusRequestEnum";
 import axios from "axios";
-import { AuthResponse } from "../../types/models/response/AuthResoinse";
+import { AuthResponse } from "../../types/models/response/AuthResponse";
 import { API_URL } from "../../http";
 
 interface authInfo {
@@ -66,7 +66,7 @@ export const handleLogout = createAsyncThunk(
     'user/handleLogout',
     async function (_,{ rejectWithValue }) {
         try {
-            const response = await logout()
+            await logout()
             localStorage.removeItem('token')
             
         } catch (error: any ) {
