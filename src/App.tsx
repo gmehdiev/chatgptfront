@@ -15,9 +15,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(user.authInfo.user.id);
     if (!user.authInfo.user.id) return;
-    console.log("useedde");
     dispatch(getAllChat(user.authInfo.user.id));
   }, [user.authInfo.user.id]);
   return (

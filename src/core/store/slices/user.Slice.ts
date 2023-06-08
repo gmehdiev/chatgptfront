@@ -81,10 +81,7 @@ export const checkAuth = createAsyncThunk(
   async function (_,{ rejectWithValue }) {
     try {
       const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true})
-      console.log(response.data.accsessToken)
-      console.log("5")
       localStorage.setItem('token', response.data.accsessToken)
-      console.log(response.data.user)
       return response.data.user
     } catch (error: any ) {
       return rejectWithValue(error?.message)
@@ -127,10 +124,8 @@ const handleActionPending = (state: initialState) =>{
 }
 
 const handleActionFulfilled = (state: initialState, action: PayloadAction<IUser>) => {
-  console.log('asd')
   state.status = StatusRequestEnum.SUCCESS;
   state.error = null;
-  console.log(action.payload)
   state.authInfo.user = action.payload;
   state.authInfo.isAuth = true;
 }

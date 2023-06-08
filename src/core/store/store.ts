@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import {reducer as userReducer} from './slices/user.Slice'
 import {reducer as chatReducer} from './slices/chat.Slice'
+import {reducer as messageReducer} from './slices/message.Slice'
 import { useDispatch } from "react-redux";
 const reducers = combineReducers({
   user: userReducer,
-  chat: chatReducer
+  chat: chatReducer,
+  message: messageReducer
 })
 
 export const store = configureStore({

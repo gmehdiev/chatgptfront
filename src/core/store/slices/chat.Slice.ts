@@ -9,7 +9,6 @@ import { chat, getChats } from "../../utils/Chat";
 
 interface initialState {
     data: {chat: IChat[], currentChatUuid: string}
-    
     status: StatusRequestEnum;
     error: string | null;
 }
@@ -26,7 +25,6 @@ export const createChat = createAsyncThunk(
     async function (userUuid: string) {
         try {
             const response = await chat(userUuid)
-            console.log(response.data)
             return response.data
         } catch (error) {
             
@@ -34,44 +32,45 @@ export const createChat = createAsyncThunk(
 })
 
 
-export const getChat = createAsyncThunk(
+export const getAllChat = createAsyncThunk(
     'chat/getChat', 
     async function (userUuid: string) {
         try {
-            console.log('asdasdasdasdasd')
             const response = await getChats(userUuid)
-            console.log(response.data)
             return response.data
         } catch (error) {
             
         }
 })
+
+
 
 const chatSlice = createSlice({
     name: 'chat',
     initialState,
     reducers:{
-
+        setCurrentChat(state, action) {
+            state.data.currentChatUuid = action.payload
+            return state
+        }
     },
     extraReducers: (builder) => {
-        builder.addCase(createChat.pending,(state: initialState, action: PayloadAction<any>)=>{
+        builder.addCase(createChat.pending,(state: initialState,)=>{
             state.error=null
             state.status=StatusRequestEnum.LOADING
         }).addCase(createChat.fulfilled,(state: initialState, action: PayloadAction<any>)=>{
             state.status=StatusRequestEnum.SUCCESS
             state.data.chat= action.payload
-        }).addCase(createChat.rejected,(state: initialState, action: PayloadAction<any>)=>{
+        }).addCase(createChat.rejected,(state: initialState, )=>{
             state.status=StatusRequestEnum.ERROR
         })
-        .addCase(getChat.pending,(state: initialState, action: PayloadAction<any>)=>{
+        .addCase(getAllChat.pending,(state: initialState, )=>{
             state.error=null
-            console.log('action.payload')
             state.status=StatusRequestEnum.LOADING
-        }).addCase(getChat.fulfilled,(state: initialState, action: PayloadAction<any>)=>{
+        }).addCase(getAllChat.fulfilled,(state: initialState, action: PayloadAction<any>)=>{
             state.status=StatusRequestEnum.SUCCESS
-            console.log(action.payload)
             state.data.chat= action.payload
-        }).addCase(getChat.rejected,(state: initialState, action: PayloadAction<any>)=>{
+        }).addCase(getAllChat.rejected,(state: initialState, )=>{
             state.status=StatusRequestEnum.ERROR
         })}
 })
