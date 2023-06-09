@@ -64,8 +64,8 @@ export const Message: FC<Message> = ({ value }) => {
             }
           >
             <Box sx={{ maxWidth: "90%" }}>
-              {paragraph.map((elem) => (
-                <Typography key={elem.length}>{elem}</Typography>
+              {paragraph.map((elem, index) => (
+                <Typography key={index}>{elem}</Typography>
               ))}
             </Box>
           </Box>

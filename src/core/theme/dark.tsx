@@ -7,7 +7,7 @@ const darkThemeOptions: ThemeOptions = {
       main: "#7286D3",
     },
     secondary: {
-      main: "#0F4C75",
+      main: "#236efa",
     },
     background: {
       paper: "#222831",
