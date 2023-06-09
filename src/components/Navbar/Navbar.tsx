@@ -1,4 +1,4 @@
-import { Box, Button, Tab, Tabs } from "@mui/material";
+import { Box } from "@mui/material";
 import { Nav } from "../Wrappers/Nav";
 import { Outlet } from "react-router-dom";
 import { MaterialUISwitch } from "../UI/MaterialUISwitch";
@@ -20,7 +20,7 @@ export const Navbar = () => {
         <Box sx={{ height: "80%" }}>
           <ChatList />
         </Box>
-        <Box sx={{ height: "20%", background: "PeachPuff" }}>
+        <Box sx={{ height: "20%" }}>
           {user?.authInfo?.user?.email || user?.authInfo?.user?.id || "попа"}
           <ModalSettings />
           <MaterialUISwitch onChange={toggleTheme.toggleColorMode} />

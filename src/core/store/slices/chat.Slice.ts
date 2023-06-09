@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { StatusRequestEnum } from "../../types/enums/StatusRequestEnum";
 import { IChat } from "../../types/models/IChat";
-import { chat, getChats } from "../../utils/Chat";
+import { chat, getChats, renameChat } from "../../utils/ApiUtils/Chat";
 
 
 
@@ -43,6 +43,22 @@ export const getAllChat = createAsyncThunk(
         }
 })
 
+interface name {
+    uuid: string, name: string
+}
+
+export const changeChatName = createAsyncThunk(
+    'chat/changeChatName', 
+    async function ({uuid, name}: name) {
+        try {
+            const response = await renameChat(uuid, name)
+            return response.data
+        } catch (error) {
+            
+        }
+})
+
+
 
 
 const chatSlice = createSlice({
@@ -72,7 +88,16 @@ const chatSlice = createSlice({
             state.data.chat= action.payload
         }).addCase(getAllChat.rejected,(state: initialState, )=>{
             state.status=StatusRequestEnum.ERROR
+        }).addCase(changeChatName.pending,(state: initialState, )=>{
+            state.error=null
+            state.status=StatusRequestEnum.LOADING
+        }).addCase(changeChatName.fulfilled,(state: initialState, action: PayloadAction<any>)=>{
+            state.status=StatusRequestEnum.SUCCESS
+            state.data.chat= action.payload
+        }).addCase(changeChatName.rejected,(state: initialState, )=>{
+            state.status=StatusRequestEnum.ERROR
         })}
+        
 })
 
 

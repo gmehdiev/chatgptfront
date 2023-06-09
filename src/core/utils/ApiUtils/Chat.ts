@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios"
-import api from "../http"
-import { IChat } from "../types/models/IChat"
+import api from "../../http"
+import { IChat } from "../../types/models/IChat"
 
 
 export const chat = async (userUuid: string): Promise<AxiosResponse<IChat>> =>{
@@ -9,4 +9,8 @@ export const chat = async (userUuid: string): Promise<AxiosResponse<IChat>> =>{
 
 export const getChats = async (userUuid: string): Promise<AxiosResponse<IChat>> =>{
     return api.post<IChat>('/getChat', {userUuid})
+}
+
+export const renameChat = async (uuid: string, name: string): Promise<AxiosResponse<IChat>> =>{
+    return api.post<IChat>('/renameChat', {uuid, name})
 }

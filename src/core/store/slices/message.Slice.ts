@@ -1,10 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"; 
 import { IMessage } from "../../types/models/IMessage";
 import { StatusRequestEnum } from "../../types/enums/StatusRequestEnum";
-import { getGpt, getMessages, sendMessages } from "../../utils/Message";
+import { getGpt, getMessages, sendMessages } from "../../utils/ApiUtils/Message";
 
 interface initialState {
-    data: IMessage[];
+    data: IMessage[] | undefined;
     status: StatusRequestEnum;
     error: string | null;
 }
@@ -72,46 +72,32 @@ const messageSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-        .addCase(sendMessage.pending,(state)=>{
-            state.status=  StatusRequestEnum.LOADING,
-            state.error= null
-        })
-        .addCase(sendMessage.fulfilled,(state, action)=>{
-            state.data = action.payload,
-            state.status=  StatusRequestEnum.SUCCESS,
-            state.error= null
-        })
-        .addCase(sendMessage.rejected,(state)=>{
+        .addCase(sendMessage.pending,handleActionPending)
+        .addCase(sendMessage.fulfilled,handleActionFulfilled)
+        .addCase(sendMessage.rejected,(_)=>{
 
         })
-        .addCase(getAllMessages.pending,(state)=>{
-            state.status=  StatusRequestEnum.LOADING,
-            state.error= null
-        })
-        .addCase(getAllMessages.fulfilled,(state, action)=>{
-            state.data = action.payload,
-            state.status=  StatusRequestEnum.SUCCESS,
-            state.error= null
-        })
-        .addCase(getAllMessages.rejected,(state)=>{
+        .addCase(getAllMessages.pending,handleActionPending)
+        .addCase(getAllMessages.fulfilled,handleActionFulfilled)
+        .addCase(getAllMessages.rejected,(_)=>{
 
         })
-        .addCase(getGptAnswer.pending,(state)=>{
-            state.status=  StatusRequestEnum.LOADING,
-            state.error= null
-        })
-        .addCase(getGptAnswer.fulfilled,(state, action)=>{
-            state.data = action.payload,
-            state.status=  StatusRequestEnum.SUCCESS,
-            state.error= null
-        })
-        .addCase(getGptAnswer.rejected,(state)=>{
+        .addCase(getGptAnswer.pending,handleActionPending)
+        .addCase(getGptAnswer.fulfilled,handleActionFulfilled)
+        .addCase(getGptAnswer.rejected,(_)=>{
 
         })}
 })
 
+const handleActionPending = (state: initialState) =>{
+    state.status = StatusRequestEnum.LOADING;
+    state.error = null;
+  }
 
-
-
+  const handleActionFulfilled = (state: initialState, action:PayloadAction<IMessage[] | undefined>) => {
+    state.data = action.payload 
+    state.status=  StatusRequestEnum.SUCCESS;
+    state.error= null;
+  }
 
 export const {actions, reducer} = messageSlice;

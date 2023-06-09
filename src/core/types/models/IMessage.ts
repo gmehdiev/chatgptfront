@@ -5,4 +5,5 @@ export type IMessage = {
     createdAt: Date
     updatedAt: Date
     chatUuid: string | null
-  }
+}
+

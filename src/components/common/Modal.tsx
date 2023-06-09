@@ -14,7 +14,6 @@ export const ModalSettings = () => {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "40vw",
-    // height: "40vh",
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
