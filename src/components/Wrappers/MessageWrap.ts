@@ -6,5 +6,5 @@ export const MessageWrap = styled("div")({
     display: 'flex',
     justifyContent:'space-between',
     flexDirection: 'column',
-    margin: 25
+    margin: 25,
 })

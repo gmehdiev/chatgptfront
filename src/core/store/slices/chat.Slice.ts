@@ -44,14 +44,16 @@ export const getAllChat = createAsyncThunk(
 })
 
 interface name {
-    uuid: string, name: string
+    uuid: string, 
+    name: string,
+    userUuid: string
 }
 
 export const changeChatName = createAsyncThunk(
     'chat/changeChatName', 
-    async function ({uuid, name}: name) {
+    async function ({uuid, name, userUuid}: name) {
         try {
-            const response = await renameChat(uuid, name)
+            const response = await renameChat(uuid, name, userUuid)
             return response.data
         } catch (error) {
             

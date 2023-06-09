@@ -1,17 +1,22 @@
-import { Button, Tabs, Tab } from "@mui/material";
+import { Button, Box, Link, IconButton, TextField } from "@mui/material";
 import { actions, createChat } from "../core/store/slices/chat.Slice";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState, useThunkDispatch } from "../core/store/store";
 import { getAllMessages } from "../core/store/slices/message.Slice";
 
+import EditIcon from "@mui/icons-material/Edit";
+import DoneIcon from "@mui/icons-material/Done";
+import CloseIcon from "@mui/icons-material/Close";
+import { ChatListElement } from "./common/ChatListElement";
+
 export const ChatList = () => {
   const { user, chat } = useSelector((state: RootState) => state);
   const dispatch = useThunkDispatch();
-  const [value, setValue] = useState(0);
-  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
-    console.log(newValue);
-    setValue(newValue);
+  const [edit, setEdit] = useState(false);
+  const [value, setValue] = useState("");
+  const handleClick = () => {
+    console.log("asdasd");
   };
 
   return (
@@ -21,24 +26,11 @@ export const ChatList = () => {
       >
         Cоздать чат
       </Button>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        sx={{ height: "80%" }}
-      >
+      <Box sx={{ height: "70vh", overflow: "auto" }}>
         {chat.data.chat.map((elem) => (
-          <Tab
-            key={elem.uuid}
-            label={elem.name || "Без названия"}
-            onClick={() => {
-              dispatch(actions.setCurrentChat(elem.uuid));
-              dispatch(getAllMessages(elem.uuid));
-            }}
-          ></Tab>
+          <ChatListElement key={elem.uuid} elem={elem} />
         ))}
-      </Tabs>
+      </Box>
     </>
   );
 };

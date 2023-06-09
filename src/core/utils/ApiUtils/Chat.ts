@@ -11,6 +11,6 @@ export const getChats = async (userUuid: string): Promise<AxiosResponse<IChat>> 
     return api.post<IChat>('/getChat', {userUuid})
 }
 
-export const renameChat = async (uuid: string, name: string): Promise<AxiosResponse<IChat>> =>{
-    return api.post<IChat>('/renameChat', {uuid, name})
+export const renameChat = async (uuid: string, name: string, userUuid:string): Promise<AxiosResponse<IChat>> =>{
+    return api.post<IChat>('/renameChat', {uuid, name, userUuid})
 }

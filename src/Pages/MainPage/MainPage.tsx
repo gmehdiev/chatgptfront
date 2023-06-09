@@ -9,6 +9,7 @@ import {
 } from "../../core/store/slices/message.Slice";
 import { Message } from "../../components/Message";
 import { StyledTextarea } from "../../components/Wrappers/StyledTextarea";
+import { SplashScreen } from "../../components/SplashScreen";
 
 export const MainPage = () => {
   const { chat, message } = useSelector((state: RootState) => state);
@@ -68,7 +69,7 @@ export const MainPage = () => {
           </Box>
         </>
       ) : (
-        <>Выберите чат</>
+        <SplashScreen />
       )}
     </Wrapper>
   );
